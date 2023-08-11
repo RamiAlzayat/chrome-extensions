@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Random Quote New Tab",
+  "name": "Quran New Tab",
   "version": "1.0",
-  "description": "Displays a random quote in a new tab.",
+  "description": "Displays a random Quran ayah in a new tab.",
   "permissions": [
     "storage",
     "activeTab",
