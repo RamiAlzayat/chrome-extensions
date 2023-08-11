@@ -1,40 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Random Quote</title>
+  <meta charset="UTF-8" />
+  <title>Quran tab</title>
   <style>
+    @font-face {
+      font-family: 'quran-font-ar';
+      src: url('UthmanTN_v2-0.ttf');
+    }
+
+    @font-face {
+      font-family: 'quran-font-ar-ayah-number';
+      src: url('quran-font-ar-ayah-number.ttf');
+    }
+
     html,
     body {
-      margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      /* background-image: url('https://source.unsplash.com/random/1920×1080/?islam');
-      background-size: cover;
-      background-position: center; */
-      overflow: hidden;
-    }
-
-    #overlay {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.7);
-    }
-
-    #quote-container {
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 350px;
+      margin: 0 auto;
       text-align: center;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
     }
 
     #background-image {
@@ -42,18 +30,86 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      position: absolute;
+      /* position: absolute; */
       z-index: -1;
     }
 
-
-    #quote {
-      font-size: 18px;
-      margin-bottom: 10px;
+    .overlay {
+      filter: blur(1rem);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      color: white;
+      font-size: 20px;
+      text-align: center;
+      z-index: 2;
     }
 
-    #number {
-      font-size: 14px;
+    .content {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      z-index: 3;
+
+      min-width: 100%;
+      height: 82vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+
+    .card {
+      width: inherit;
+      padding: 3em;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .arabic-sub {
+      font-size: 24px;
+      line-height: 28px;
+      vertical-align: middle;
+      direction: rtl;
+      margin: 0;
+      color: #fff;
+      font-weight: bold;
+      font-style: normal;
+      font-family: 'quran-font-ar';
+    }
+
+    .ayah-number {
+      margin-right: 5px;
+      font-family: 'quran-font-ar-ayah-number';
+    }
+
+    .surah-name {
+      font-family: 'quran-font-ar-ayah-number';
+      font-size: 12px;
+      position: absolute;
+      right: 6em;
+      bottom: 7em;
+      color: #fff;
+      z-index: 99;
+    }
+
+    .hr-surah {
+      display: block;
+      margin: -5px auto 0;
+      width: 135px;
+      height: 10px;
+    }
+
+    .english-sub {
+      font-size: 18px;
+      color: #fff;
+      font-family: 'quran-font-ar-ayah-number';
     }
 
     .fade-in-image {
@@ -75,12 +131,23 @@
 
 <body>
   <img id="background-image" class="fade-in-image" src="https://source.unsplash.com/random/1920×1080/?islam" />
-  <div id="overlay">
-    <div id="quote-container">
-      <p id="quote"></p>
-      <p id="number"></p>
+
+  <div class="content">
+    <div class="card fade-in">
+      <p class="arabic-sub">
+        <span class="arabic-text"></span>
+        <span class="ayah-number"></span>
+      </p>
+      <p class="english-sub"></p>
     </div>
   </div>
+
+  <span class="surah-name">
+    <span class="surah-name-text"></span>
+    <img class="hr-surah" src="hr_bg.png">
+  </span>
+
+  <div class="overlay"></div>
   <script src="popup.js"></script>
 </body>
 

@@ -12,8 +12,8 @@
     "newtab": "popup.html"
   },
   "icons": {
-    "16": "zip.png",
-    "48": "zip.png",
-    "128": "zip.png"
+    "16": "quran.png",
+    "48": "quran.png",
+    "128": "quran.png"
   }
 }
