@@ -3,11 +3,6 @@
   "name": "Quran New Tab",
   "version": "1.0",
   "description": "Displays a random Quran ayah in a new tab.",
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting"
-  ],
   "chrome_url_overrides": {
     "newtab": "popup.html"
   },
