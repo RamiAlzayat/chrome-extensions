@@ -44,4 +44,7 @@ If you'd like to contribute to this extension or the Chrome Extensions repositor
 
 Thank you for choosing the **Chrome Extensions** repository! We hope our extensions make your browsing experience more meaningful and productive.
 
+
+<h3 align="left">Support us:</h3>
+<p><a href="https://www.buymeacoffee.com/ramyzarrU"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="ramyzarrU" /></a></p>
 ---
