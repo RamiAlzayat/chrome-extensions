@@ -31,7 +31,7 @@ console.log(ayahNumberElement);
 console.log(englishSubElement);
 
 function fetchQuote() {
-  fetch(`https://api.alquran.cloud/v1/ayah/${getRandomAyahNumber()}/editions/ar.alafasy,en.asad`)
+  fetch(`https://api.alquran.cloud/v1/ayah/${getRandomAyahNumber()}/editions/ar.alafasy,en.yusufali`)
     .then(response => response.json())
     .then(data => {
       const resAr = data.data[0]
