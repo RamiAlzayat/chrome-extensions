@@ -74,7 +74,7 @@ function fetchQuote(paramAyahNumber) {
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function () {
   const ayahNumber = getRandomAyahNumber();
-  fetchQuote(1);
+  fetchQuote(ayahNumber);
 
   prev.addEventListener('click', function () {
     fetchQuote(prev.dataset.ayahNumber);
