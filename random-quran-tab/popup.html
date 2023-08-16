@@ -119,6 +119,7 @@
       cursor: pointer;
       user-select: none;
       font-size: 30px;
+      transition: all 0.3s ease-in-out;
     }
 
     .previous-ayah:hover,
@@ -128,6 +129,11 @@
 
     audio::-webkit-media-controls-enclosure {
       background-color: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease-in-out;
+    }
+
+    audio::-webkit-media-controls-enclosure:hover {
+      background-color: #fff;
     }
 
     @keyframes fadeIn {
