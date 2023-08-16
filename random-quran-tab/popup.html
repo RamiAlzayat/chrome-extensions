@@ -73,7 +73,7 @@
 
     .arabic-sub {
       font-size: 24px;
-      line-height: 28px;
+      /* line-height: 28px; */
       vertical-align: middle;
       direction: rtl;
       margin: 0;
@@ -115,6 +115,18 @@
       animation: fadeIn 1s;
     }
 
+    .previous-ayah,
+    .next-ayah {
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      font-size: 30px;
+    }
+
+    .previous-ayah:hover,
+    .next-ayah:hover {
+      opacity: 0.5;
+    }
 
     @keyframes fadeIn {
       0% {
@@ -132,20 +144,25 @@
   <img id="background-image" class="fade-in-image" src="https://source.unsplash.com/random/1920×1080/?islam" />
 
   <div class="content">
+    <span class="previous-ayah">&#9664;</span>
     <div class="card fade-in">
       <p class="arabic-sub">
         <span class="arabic-text"></span>
         <span class="ayah-number"></span>
       </p>
-      <p class="english-sub"></p>
+      <div>
+        <p class="english-sub"></p>
+        <audio controls id="audio-element">
+        </audio>
+      </div>
     </div>
+    <span class="next-ayah">&#9654;</span>
   </div>
 
   <span class="surah-name">
     <span class="surah-name-text"></span>
     <img class="hr-surah" src="hr_bg.png">
   </span>
-
   <div class="overlay"></div>
   <script src="popup.js"></script>
 </body>
