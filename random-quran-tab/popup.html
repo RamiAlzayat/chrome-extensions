@@ -115,16 +115,18 @@
 
     .previous-ayah,
     .next-ayah {
-      color: #fff;
       cursor: pointer;
       user-select: none;
       font-size: 30px;
+      color: #fff;
       transition: all 0.3s ease-in-out;
+      background-color: transparent;
+      border: 0;
     }
 
     .previous-ayah:hover,
     .next-ayah:hover {
-      opacity: 0.5;
+      color: rgba(255, 255, 255, 0.3);
     }
 
     audio::-webkit-media-controls-enclosure {
@@ -145,6 +147,66 @@
         opacity: 1;
       }
     }
+
+    #ayahDropdown,
+    #surahDropdown {
+      font-size: 18px;
+      font-family: 'quran-font-ar-ayah-number';
+
+    }
+
+    .dropdown-container {
+      position: absolute;
+      z-index: 99;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+      left: 6em;
+      bottom: 4em;
+      background-color: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease-in-out;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .dropdown-container:hover {
+      background-color: #fff;
+      color: black;
+    }
+
+    .dropdown-container:hover .styled-dropdown {
+      color: black;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .dropdown-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .styled-dropdown {
+      width: 200px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      color: #fff;
+      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .styled-dropdown:hover {
+      background-color: rgba(255, 255, 220, 1);
+    }
+
+    .disabled {
+      pointer-events: none;
+      opacity: 0.5;
+      color: rgba(255, 255, 255, 0.3);
+    }
   </style>
 </head>
 
@@ -152,7 +214,7 @@
   <img id="background-image" class="fade-in-image" src="https://source.unsplash.com/random/1920×1080/?islam" />
 
   <div class="content">
-    <span class="previous-ayah">&#9664;</span>
+    <button class="previous-ayah">&#9664;</button>
     <div class="card fade-in">
       <p class="arabic-sub">
         <span class="arabic-text" id="arabic-text"></span>
@@ -167,7 +229,19 @@
         </audio>
       </div>
     </div>
-    <span class="next-ayah">&#9654;</span>
+    <button class="next-ayah">&#9654;</button>
+  </div>
+
+  <div class="dropdown-container">
+    <label for="surah-dropdown" class="dropdown-label">Select Surah - اختر السورة:</label>
+    <select id="surah-dropdown" class="styled-dropdown">
+    </select>
+
+    <br>
+
+    <label for="ayah-dropdown" class="dropdown-label">Select Ayah - اختر الآية:</label>
+    <select id="ayah-dropdown" class="styled-dropdown">
+    </select>
   </div>
 
   <span class="surah-name">

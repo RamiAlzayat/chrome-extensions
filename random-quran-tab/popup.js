@@ -1,69 +1,75 @@
-
 const maxChar = 600;
+const firstAyahNumber = 1;
+const lastAyahNumber = 6236;
 
-// Utility function to get a random ayah number
-function getRandomAyahNumber() {
-  return Math.floor(Math.random() * 6236) + 1;
+let currentSurahNumber = null;
+let currentAyahNumber = null;
+
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//English to Arabic digits.
-function EntoAr(number) {
-  return number.replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d])
+function convertToArabicDigits(number) {
+  return number.replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
 }
 
+// Grouping the DOM elements for better organization
+const elements = {
+  arabicText: document.querySelector(".arabic-text"),
+  ayahNumber: document.querySelector(".ayah-number"),
+  ayahNumberEnglish: document.querySelector(".ayah-number-english"),
+  englishSub: document.querySelector(".english-text"),
+  surahName: document.querySelector(".surah-name-text"),
+  audio: document.querySelector("#audio-element"),
+  prevButton: document.querySelector(".previous-ayah"),
+  nextButton: document.querySelector(".next-ayah"),
+  surahDropdown: document.querySelector('#surah-dropdown'),
+  ayahDropdown: document.querySelector('#ayah-dropdown')
+};
 
-// Utility function to render Arabic text
-function renderArText(arText, alfatiha) {
-  if (alfatiha) {
-    return arText.trim().substring(0, maxChar);
-  } else {
-    return arText
-      .split('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ')
-      .join(' ')
-      .trim()
-      .substring(0, maxChar);
-  }
+// Fetch and render the initial quote
+function init() {
+  const randomAyahNumber = getRandomNumber(firstAyahNumber, lastAyahNumber);
+  fetchAndRenderQuote(randomAyahNumber);
 }
 
-// DOM elements
-const arabicTextElement = document.querySelector(".arabic-text");
-const ayahNumberElement = document.querySelector(".ayah-number");
-const ayahNumberEnglishElement = document.querySelector(".ayah-number-english");
-const englishSubElement = document.querySelector(".english-text");
-const surahNameElement = document.querySelector(".surah-name-text");
-const audioElement = document.querySelector("#audio-element");
-const prev = document.querySelector(".previous-ayah");
-const next = document.querySelector(".next-ayah");
-
-// Fetch and render the quote
-function fetchQuote(paramAyahNumber) {
-  const apiUrl = `https://api.alquran.cloud/v1/ayah/${paramAyahNumber}/editions/ar.alafasy,en.yusufali,ar.jalalayn`;
-
+// Common function to fetch and render a quote
+function fetchAndRenderQuote(ayahNumber) {
+  const apiUrl = `https://api.alquran.cloud/v1/ayah/${ayahNumber}/editions/ar.alafasy,en.yusufali,ar.jalalayn`;
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      const resAr = data.data[0];
-      const resEn = data.data[1];
+      const arabicData = data.data[0];
+      const englishData = data.data[1];
 
-      const arTextValue = resAr.text;
-      const enTextValue = resEn.text;
-      const ayahNumberValue = resAr.numberInSurah;
-      const alfatihaValue = resAr.surah.number === 1;
+      currentAyahNumber = arabicData.number;
+      currentSurahNumber = arabicData.surah.number;
 
-      prev.dataset.ayahNumber = Number(paramAyahNumber) - 1;
-      next.dataset.ayahNumber = Number(paramAyahNumber) + 1;
+      const arabicText = arabicData.text;
+      const englishText = englishData.text;
+      const ayahNumberValue = arabicData.numberInSurah;
 
-      arabicTextElement.textContent = renderArText(arTextValue, alfatihaValue);
-      ayahNumberElement.textContent = EntoAr(`${ayahNumberValue}`);
-      ayahNumberEnglishElement.textContent = `﴾${ayahNumberValue}﴿`;
-      englishSubElement.textContent = enTextValue.trim().substring(0, maxChar);
-      surahNameElement.textContent = `⦑ ${resAr.surah.name} ${resAr.surah.englishName} ⦒`;
-      audioElement.src = resAr.audio;
-      audioElement.onerror = function () {
-        audioElement.src = resAr.audioSecondary[0];
+      elements.arabicText.textContent = arabicText
+      const trimmedString = englishText.length > maxChar ?
+
+        englishText.substring(0, maxChar - 3) + "..." :
+        englishText;
+      elements.englishSub.textContent = trimmedString
+
+      elements.ayahNumber.textContent = convertToArabicDigits(`${ayahNumberValue} `);
+      elements.ayahNumberEnglish.textContent = `﴾${ayahNumberValue}﴿`;
+
+
+      elements.surahName.textContent = `⦑ ${arabicData.surah.name} ${arabicData.surah.englishName} ⦒`;
+
+      updateButtonStates();
+      elements.audio.src = arabicData.audio;
+      elements.audio.onerror = function () {
+        elements.audio.src = arabicData.audioSecondary[0];
       };
-      audioElement.volume = 0.3;
+      elements.audio.volume = 0.3;
 
+      setDropdownOptions(arabicData.numberInSurah);
       console.log('Quote fetched successfully!', data);
     })
     .catch(error => {
@@ -71,19 +77,64 @@ function fetchQuote(paramAyahNumber) {
     });
 }
 
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function () {
-  const ayahNumber = getRandomAyahNumber();
-  fetchQuote(ayahNumber);
+// Update the state of previous and next buttons
+function updateButtonStates() {
+  elements.prevButton.disabled = currentAyahNumber === firstAyahNumber;
+  elements.nextButton.disabled = currentAyahNumber === lastAyahNumber;
+  elements.prevButton.classList.toggle('disabled', elements.prevButton.disabled);
+  elements.nextButton.classList.toggle('disabled', elements.nextButton.disabled);
+}
 
-  prev.addEventListener('click', function () {
-    fetchQuote(prev.dataset.ayahNumber);
+// Set options in surah and ayah dropdowns
+function setDropdownOptions(ayahNumberInSurah) {
+  setSurahDropdownOptions();
+  setAyahDropdownOptions(ayahNumberInSurah);
+}
+
+// Set options in the surah dropdown
+function setSurahDropdownOptions() {
+  const apiUrl = `https://api.alquran.cloud/v1/surah`;
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      elements.surahDropdown.innerHTML = data.data
+        .map(surah => `<option value="${surah.number}">${surah.number}. ${surah.name} (${surah.englishName})</option>`)
+        .join('');
+
+      elements.surahDropdown.value = currentSurahNumber;
+    });
+}
+
+// Set options in the ayah dropdown
+function setAyahDropdownOptions(ayahNumberInSurah) {
+  const apiUrl = `https://api.alquran.cloud/v1/surah/${currentSurahNumber}`;
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      elements.ayahDropdown.innerHTML = data.data.ayahs
+        .map(ayah => `<option value="${ayah.numberInSurah}" data-ayah-number="${ayah.number}">${ayah.numberInSurah}</option>`)
+        .join('');
+
+      elements.ayahDropdown.value = ayahNumberInSurah
+    });
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function () {
+  init();
+
+  elements.prevButton.addEventListener('click', () => fetchAndRenderQuote(currentAyahNumber - 1));
+  elements.nextButton.addEventListener('click', () => fetchAndRenderQuote(currentAyahNumber + 1));
+
+  elements.surahDropdown.addEventListener('change', function () {
+    const selectedSurahNumber = elements.surahDropdown.value;
+    currentSurahNumber = selectedSurahNumber;
+    fetchAndRenderQuote(`${selectedSurahNumber}:1`);
   });
 
-  next.addEventListener('click', function () {
-    fetchQuote(next.dataset.ayahNumber);
+  elements.ayahDropdown.addEventListener('change', function () {
+    const selectedAyahNumber = elements.ayahDropdown.options[elements.ayahDropdown.selectedIndex].dataset.ayahNumber;
+    currentAyahNumber = selectedAyahNumber;
+    fetchAndRenderQuote(selectedAyahNumber);
   });
 });
-
-
-
