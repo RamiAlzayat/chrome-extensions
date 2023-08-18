@@ -77,8 +77,7 @@
       vertical-align: middle;
       direction: rtl;
       margin: 0;
-      color: #fff;
-      font-weight: bold;
+      color: antiquewhite;
       font-style: normal;
       /* font-family: 'quran-font-ar'; */
     }
@@ -90,11 +89,11 @@
 
     .surah-name {
       font-family: 'quran-font-ar-ayah-number';
-      font-size: 18px;
+      font-size: 14px;
       position: absolute;
       right: 6em;
       bottom: 4em;
-      color: #fff;
+      color: antiquewhite;
       z-index: 99;
     }
 
@@ -105,7 +104,7 @@
 
     .english-sub {
       font-size: 18px;
-      color: #fff;
+      color: antiquewhite;
       font-family: 'quran-font-ar-ayah-number';
     }
 
@@ -156,6 +155,7 @@
     }
 
     .dropdown-container {
+      font-family: 'quran-font-ar-ayah-number';
       position: absolute;
       z-index: 99;
       width: 200px;
@@ -164,19 +164,15 @@
       color: white;
       left: 6em;
       bottom: 4em;
-      background-color: rgba(255, 255, 255, 0.3);
+      /* background-color: rgba(255, 255, 255, 0.3); */
       transition: all 0.3s ease-in-out;
       padding: 8px;
       border-radius: 8px;
     }
 
-    .dropdown-container:hover {
-      background-color: #fff;
-      color: black;
-    }
+
 
     .dropdown-container:hover .styled-dropdown {
-      color: black;
       cursor: pointer;
       transition: all 0.3s ease-in-out;
     }
@@ -184,14 +180,14 @@
     .dropdown-label {
       display: block;
       margin-bottom: 5px;
-      font-weight: bold;
+      color: antiquewhite;
     }
 
     .styled-dropdown {
       width: 200px;
       padding: 8px;
       border: 1px solid #ccc;
-      color: #fff;
+      color: antiquewhite;
       border-radius: 4px;
       background-color: rgba(255, 255, 255, 0.3);
       font-size: 12px;
@@ -199,7 +195,8 @@
     }
 
     .styled-dropdown:hover {
-      background-color: rgba(255, 255, 220, 1);
+      color: black;
+      background-color: #fff;
     }
 
     .disabled {
@@ -233,13 +230,13 @@
   </div>
 
   <div class="dropdown-container">
-    <label for="surah-dropdown" class="dropdown-label">Select Surah - اختر السورة:</label>
+    <label for="surah-dropdown" class="dropdown-label">Surah - السورة:</label>
     <select id="surah-dropdown" class="styled-dropdown">
     </select>
 
     <br>
 
-    <label for="ayah-dropdown" class="dropdown-label">Select Ayah - اختر الآية:</label>
+    <label for="ayah-dropdown" class="dropdown-label">Ayah - الآية:</label>
     <select id="ayah-dropdown" class="styled-dropdown">
     </select>
   </div>
