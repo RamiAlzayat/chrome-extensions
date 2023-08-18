@@ -4,6 +4,8 @@ Welcome to the **Chrome Extensions** repository! This repository contains a coll
 
 ## Random Quran Tab Extension
 
+Demo link: https://quran.alzayat.de/
+
 The **Random Quran Tab** extension is a simple yet impactful tool that enriches your daily browsing routine with spiritual enlightenment. Every time you open a new tab in your Chrome browser, this extension will display a random verse from the Quran, allowing you to reflect on its wisdom and guidance.
 
 ### Installation
