@@ -4,248 +4,64 @@
 <head>
   <meta charset="UTF-8" />
   <title>Quran tab</title>
-  <style>
-    @font-face {
-      font-family: 'quran-font-ar';
-      src: url('assets/UthmanTN_v2-0.ttf');
-    }
-
-    @font-face {
-      font-family: 'quran-font-ar-ayah-number';
-      src: url('assets/quran-font-ar-ayah-number.ttf');
-    }
-
-    html,
-    body {
-      padding: 0;
-      margin: 0 auto;
-      text-align: center;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-    }
-
-    #background-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      /* position: absolute; */
-      z-index: -1;
-    }
-
-    .overlay {
-      filter: blur(1rem);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      width: 100%;
-      color: white;
-      font-size: 20px;
-      text-align: center;
-      z-index: 2;
-    }
-
-    .content {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      z-index: 3;
-      max-width: 80vw;
-      height: 82vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-
-    .card {
-      width: inherit;
-      padding: 3em;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
-    .arabic-sub {
-      font-size: 24px;
-      /* line-height: 28px; */
-      vertical-align: middle;
-      direction: rtl;
-      margin: 0;
-      color: antiquewhite;
-      font-style: normal;
-      /* font-family: 'quran-font-ar'; */
-    }
-
-    .ayah-number {
-      margin-right: 5px;
-      font-family: 'quran-font-ar-ayah-number';
-    }
-
-    .surah-name {
-      font-family: 'quran-font-ar-ayah-number';
-      font-size: 14px;
-      position: absolute;
-      right: 6em;
-      bottom: 4em;
-      color: antiquewhite;
-      z-index: 99;
-    }
-
-    .hr-surah {
-      display: block;
-      height: 15px;
-    }
-
-    .english-sub {
-      font-size: 18px;
-      color: antiquewhite;
-      font-family: 'quran-font-ar-ayah-number';
-    }
-
-    .fade-in-image {
-      animation: fadeIn 1s;
-    }
-
-    .previous-ayah,
-    .next-ayah {
-      cursor: pointer;
-      user-select: none;
-      font-size: 30px;
-      color: #fff;
-      transition: all 0.3s ease-in-out;
-      background-color: transparent;
-      border: 0;
-    }
-
-    .previous-ayah:hover,
-    .next-ayah:hover {
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    audio::-webkit-media-controls-enclosure {
-      background-color: rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease-in-out;
-    }
-
-    audio::-webkit-media-controls-enclosure:hover {
-      background-color: #fff;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-
-    #ayahDropdown,
-    #surahDropdown {
-      font-size: 18px;
-      font-family: 'quran-font-ar-ayah-number';
-
-    }
-
-    .dropdown-container {
-      font-family: 'quran-font-ar-ayah-number';
-      position: absolute;
-      z-index: 99;
-      width: 200px;
-      display: flex;
-      flex-direction: column;
-      color: white;
-      left: 6em;
-      bottom: 4em;
-      /* background-color: rgba(255, 255, 255, 0.3); */
-      transition: all 0.3s ease-in-out;
-      padding: 8px;
-      border-radius: 8px;
-    }
-
-
-
-    .dropdown-container:hover .styled-dropdown {
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .dropdown-label {
-      display: block;
-      margin-bottom: 5px;
-      color: antiquewhite;
-    }
-
-    .styled-dropdown {
-      width: 200px;
-      padding: 8px;
-      border: 1px solid #ccc;
-      color: antiquewhite;
-      border-radius: 4px;
-      background-color: rgba(255, 255, 255, 0.3);
-      font-size: 12px;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .styled-dropdown:hover {
-      color: black;
-      background-color: #fff;
-    }
-
-    .disabled {
-      pointer-events: none;
-      opacity: 0.5;
-      color: rgba(255, 255, 255, 0.3);
-    }
-  </style>
+  <link rel="stylesheet" href="popup.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
   <img id="background-image" class="fade-in-image" src="https://source.unsplash.com/random/1920×1080/?islam" />
 
   <div class="content">
-    <button class="previous-ayah">&#9664;</button>
-    <div class="card fade-in">
-      <p class="arabic-sub">
-        <span class="arabic-text" id="arabic-text"></span>
-        <span class="ayah-number"></span>
-      </p>
-      <div>
-        <p class="english-sub">
-          <span class="english-text"></span>
-          <span class="ayah-number-english"></span>
+
+    <div class="header">
+      <h2>Quran Tab</h2>
+    </div>
+
+    <div class="main">
+      <button class="previous-ayah">&#8249;</button>
+      <div class="text-container">
+        <p class="arabic-sub fade-in-text">
+          <span class="arabic-text" id="arabic-text"></span>
+          <span class="ayah-number"></span>
         </p>
-        <audio controls id="audio-element">
-        </audio>
+        <div>
+          <p class="english-sub fade-in-text">
+            <span class="english-text"></span>
+            <span class="ayah-number-english"></span>
+          </p>
+          <audio controls id="audio-element">
+          </audio>
+        </div>
+      </div>
+      <button class="next-ayah">&#8250;</button>
+    </div>
+
+
+    <div class="footer">
+      <div class="dropdown-container">
+        <label for="surah-dropdown" class="dropdown-label">Surah - السورة:</label>
+        <select id="surah-dropdown" class="styled-dropdown">
+        </select>
+        <br>
+        <label for="ayah-dropdown" class="dropdown-label">Ayah - الآية:</label>
+        <select id="ayah-dropdown" class="styled-dropdown">
+        </select>
+      </div>
+
+      <div class="tooltip">
+        <span class="surah-name">
+          <span class="surah-name-text"></span>
+          <img class="hr-surah" src="assets/hr_bg.png">
+        </span>
+
+        <div id="surah-info-popover" class="surah-info-popover"></div>
       </div>
     </div>
-    <button class="next-ayah">&#9654;</button>
+
+
+
   </div>
 
-  <div class="dropdown-container">
-    <label for="surah-dropdown" class="dropdown-label">Surah - السورة:</label>
-    <select id="surah-dropdown" class="styled-dropdown">
-    </select>
-
-    <br>
-
-    <label for="ayah-dropdown" class="dropdown-label">Ayah - الآية:</label>
-    <select id="ayah-dropdown" class="styled-dropdown">
-    </select>
-  </div>
-
-  <span class="surah-name">
-    <span class="surah-name-text"></span>
-    <img class="hr-surah" src="assets/hr_bg.png">
-  </span>
-  <div class="overlay"></div>
   <script src="popup.js"></script>
 </body>
 

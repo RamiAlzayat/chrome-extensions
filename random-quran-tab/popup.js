@@ -15,16 +15,20 @@ function convertToArabicDigits(number) {
 
 // Grouping the DOM elements for better organization
 const elements = {
+  arabicSub: document.querySelector(".arabic-sub"),
   arabicText: document.querySelector(".arabic-text"),
   ayahNumber: document.querySelector(".ayah-number"),
   ayahNumberEnglish: document.querySelector(".ayah-number-english"),
   englishSub: document.querySelector(".english-text"),
+  surahNameContainer: document.querySelector(".surah-name"),
   surahName: document.querySelector(".surah-name-text"),
   audio: document.querySelector("#audio-element"),
   prevButton: document.querySelector(".previous-ayah"),
   nextButton: document.querySelector(".next-ayah"),
   surahDropdown: document.querySelector('#surah-dropdown'),
-  ayahDropdown: document.querySelector('#ayah-dropdown')
+  ayahDropdown: document.querySelector('#ayah-dropdown'),
+  surahInfoPopover: document.querySelector("#surah-info-popover"),
+  ayahInfoPopover: document.querySelector("#ayah-info-popover"),
 };
 
 // Fetch and render the initial quote
@@ -41,6 +45,7 @@ function fetchAndRenderQuote(ayahNumber) {
     .then(data => {
       const arabicData = data.data[0];
       const englishData = data.data[1];
+      // const tafserData = data.data[2];
 
       currentAyahNumber = arabicData.number;
       currentSurahNumber = arabicData.surah.number;
@@ -59,8 +64,32 @@ function fetchAndRenderQuote(ayahNumber) {
       elements.ayahNumber.textContent = convertToArabicDigits(`${ayahNumberValue} `);
       elements.ayahNumberEnglish.textContent = `﴾${ayahNumberValue}﴿`;
 
+      elements.surahInfoPopover.innerHTML = `
+        <div class="tooltiptext">
+          <div class="revelation-type">
+          Revelation type: ${arabicData.surah.revelationType}
+          </div>
+          <div class="number-of-ayahs">
+          Number of ayahs: ${arabicData.surah.numberOfAyahs} Ayahs
+          </div>
+          <div class="english-name-translation">
+          English name translation: ${arabicData.surah.englishNameTranslation}
+          </div>
+          </div>
+      `;
+      // console.log(arabicData);
 
-      elements.surahName.textContent = `⦑ ${arabicData.surah.name} ${arabicData.surah.englishName} ⦒`;
+      // elements.ayahInfoPopover.innerHTML = `
+      //   <div class="tooltiptext">
+      //     <div class="tafser">
+      //       ${tafserData.text}
+      //     </div>
+      //     </div>
+      // `;
+
+
+
+      elements.surahName.textContent = `⦑ ${arabicData.surah.name} ${arabicData.surah.number}.${arabicData.surah.englishName} ⦒`;
 
       updateButtonStates();
       elements.audio.src = arabicData.audio;
@@ -137,4 +166,20 @@ document.addEventListener('DOMContentLoaded', function () {
     currentAyahNumber = selectedAyahNumber;
     fetchAndRenderQuote(selectedAyahNumber);
   });
+
+
+
+  // elements.surahNameContainer.addEventListener("click", () => {
+  //   elements.surahInfoPopover.classList.toggle("hidden");
+  // });
+
+  // elements.arabicSub.addEventListener("click", () => {
+  //   elements.ayahInfoPopover.classList.toggle("hidden");
+  // });
+
+  // document.addEventListener("click", (event) => {
+  //   if (!elements.surahNameContainer.contains(event.target)) {
+  //     elements.surahInfoPopover.classList.add("hidden");
+  //   }
+  // });
 });

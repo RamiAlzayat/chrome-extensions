@@ -1,0 +1,267 @@
+@font-face {
+  font-family: 'quran-font-ar';
+  src: url('assets/UthmanTN_v2-0.ttf');
+}
+
+@font-face {
+  font-family: 'quran-font-ar-ayah-number';
+  src: url('assets/quran-font-ar-ayah-number.ttf');
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.arabic-sub {
+  font-size: 24px;
+  vertical-align: middle;
+  direction: rtl;
+  margin: 0;
+  color: antiquewhite;
+  font-style: normal;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ayah-number {
+  margin-right: 5px;
+  font-family: 'quran-font-ar-ayah-number';
+  font-size: 32px;
+}
+
+.surah-name {
+  font-family: 'quran-font-ar-ayah-number';
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.3);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 4px;
+  user-select: none;
+}
+
+.surah-name:hover {
+  color: antiquewhite;
+  cursor: pointer;
+}
+
+.surah-name-text:hover {
+  cursor: pointer;
+}
+
+.surah-name:hover .hr-surah  {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.hr-surah {
+  display: block;
+  height: 15px;
+  max-width: 200px;
+  opacity: 0.5;
+}
+
+.english-sub {
+  font-size: 18px;
+  color: antiquewhite;
+  font-family: 'quran-font-ar-ayah-number';
+}
+
+.fade-in-image {
+  animation: fadeIn 5s;
+}
+
+.previous-ayah {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.next-ayah {
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+.previous-ayah,
+.next-ayah {
+  cursor: pointer;
+  user-select: none;
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+  border: 0;
+}
+
+.previous-ayah:hover,
+.next-ayah:hover {
+  color: #fff;
+}
+
+audio::-webkit-media-controls-enclosure {
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+audio::-webkit-media-controls-enclosure:hover {
+  background-color: #fff;
+}
+
+.fade-in-text {
+  opacity: 0; /* Initially invisible */
+  animation: fadeIn 2s ease forwards; /* Apply the fade-in animation */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+#ayahDropdown,
+#surahDropdown {
+  font-size: 18px;
+  font-family: 'quran-font-ar-ayah-number';
+
+}
+
+.dropdown-container {
+  font-family: 'quran-font-ar-ayah-number';
+  /* position: absolute; */
+  z-index: 99;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  /* left: 6em;
+  bottom: 4em; */
+  /* background-color: rgba(255, 255, 255, 0.3); */
+  transition: all 0.3s ease-in-out;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+
+
+.dropdown-container:hover .styled-dropdown {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-label {
+  display: block;
+  margin-bottom: 5px;
+  color: antiquewhite;
+}
+
+.styled-dropdown {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  color: antiquewhite;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.styled-dropdown:hover {
+  color: black;
+  background-color: #fff;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.header, .footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header {
+  padding: 32px 32px 0 32px;
+  align-items: center;
+}
+
+.footer {
+  padding: 0 32px 32px 32px;
+}
+
+h2 {
+  color: #fff;
+  font-weight: 100;
+}
+
+.text-container {
+  min-height: 214px;
+  position: relative;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 4px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -50%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
