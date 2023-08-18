@@ -265,3 +265,37 @@ h2 {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+
+
+@media screen and (max-width:639px) {
+  .previous-ayah {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .next-ayah {
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+
+  .english-sub {
+    font-size: 14px;
+    margin: 4px 0;
+  }
+
+  .surah-name-container, .header {
+    display: none;
+  }
+
+  .footer {
+    justify-content: center;
+    padding: 0 16px 16px 16px;
+  }
+
+  .text-container {
+    text-align: center;
+    overflow: auto;
+    max-height: 60vh;
+  }
+  }
