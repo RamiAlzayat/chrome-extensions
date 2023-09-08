@@ -13,9 +13,10 @@ new_minor=$((minor + 1))
 # Create the new version string
 new_version="$major.$new_minor"
 
-zip_filename="v1.4.zip"
+zip_filename="v1.5.zip"
 # Copy the zip file to remote SSH folder
 remote_username="hassio"
 remote_server="192.168.178.2"
 remote_folder="/ssl/nginxproxymanager/websites/quran/test/"
 scp "$zip_filename" "$remote_username@$remote_server:$remote_folder"
+
