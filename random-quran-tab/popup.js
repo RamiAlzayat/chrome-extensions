@@ -29,6 +29,9 @@ const elements = {
   ayahDropdown: document.querySelector('#ayah-dropdown'),
   surahInfoPopover: document.querySelector("#surah-info-popover"),
   ayahInfoPopover: document.querySelector("#ayah-info-popover"),
+  playButton: document.querySelector(".play-button"),
+  pauseButton: document.querySelector(".pause-button"),
+  stopButton: document.querySelector(".stop-button"),
 };
 
 // Fetch and render the initial quote
@@ -167,6 +170,28 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchAndRenderQuote(selectedAyahNumber);
   });
 
+  elements.playButton.addEventListener('click', () => {
+    elements.audio.play();
+    console.log(elements.audio);
+    elements.audio.onended = function () {
+      if (currentAyahNumber === lastAyahNumber) {
+        fetchAndRenderQuote(firstAyahNumber);
+      } else {
+        fetchAndRenderQuote(currentAyahNumber + 1);
+      }
+      elements.audio.autoplay = true;
+    }
+
+  });
+
+  elements.pauseButton.addEventListener('click', () => {
+    elements.audio.pause();
+  });
+
+  elements.stopButton.addEventListener('click', () => {
+    elements.audio.pause();
+    elements.audio.currentTime = 0;
+  });
 
 
   // elements.surahNameContainer.addEventListener("click", () => {
