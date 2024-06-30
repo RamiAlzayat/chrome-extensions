@@ -186,11 +186,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   elements.pauseButton.addEventListener('click', () => {
     elements.audio.pause();
+    elements.audio.autoplay = false;
+    elements.audio.onended = null;
   });
 
   elements.stopButton.addEventListener('click', () => {
     elements.audio.pause();
     elements.audio.currentTime = 0;
+    elements.audio.autoplay = false;
+    elements.audio.onended = null;
   });
 
 
