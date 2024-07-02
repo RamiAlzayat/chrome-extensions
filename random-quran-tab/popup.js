@@ -32,7 +32,7 @@ const elements = {
   playButton: document.querySelector(".play-button"),
   pauseButton: document.querySelector(".pause-button"),
   stopButton: document.querySelector(".stop-button"),
-  unsplashImageElement: document.querySelector("#background-image"),
+  // unsplashImageElement: document.querySelector("#background-image"),
   videoBackground: document.querySelector("#background-video"),
 };
 
@@ -49,6 +49,14 @@ function loadVideoBackground() {
     "assets/videos/1.webm",
     "assets/videos/2.webm",
     "assets/videos/3.webm",
+    "assets/videos/4.webm",
+    "assets/videos/5.webm",
+    "assets/videos/6.webm",
+    "assets/videos/7.webm",
+    "assets/videos/8.webm",
+    "assets/videos/9.webm",
+    "assets/videos/10.webm",
+    "assets/videos/11.webm",
   ];
   const videoUrl = chrome.runtime.getURL(videos[getRandomNumber(0, videos.length - 1)]);
   elements.videoBackground.src = videoUrl;
@@ -57,20 +65,6 @@ function loadVideoBackground() {
   elements.videoBackground.play();
 
 }
-
-
-// function fetchUnsplashImage() {
-//   const accessKey = '5CpYk1i3tVg562ScIhuYnOBoRyC9RkYSwUmZD9JXcBY';
-//   const imageUrl = `https://api.unsplash.com/photos/random?client_id=${accessKey}`;
-
-//   fetch(`${imageUrl}`)
-//     .then(response => response.json())
-//     .then(data => {
-//       const imageData = data.urls.full;
-//       elements.unsplashImageElement.src = imageData;
-//       console.log("Image fetched successfully!", data);
-//     })
-// }
 
 // Common function to fetch and render a quote
 function fetchAndRenderQuote(ayahNumber) {
